@@ -29,3 +29,9 @@ spring:
         connectionTimeout: 5000
         timeout: 3000
         writeTimeout: 5000
+
+  application:
+    security:
+      jwt:
+        secret-key: secretkey # secret key for JWT token, change for production
+        expiration: 86400000
