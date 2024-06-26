@@ -57,12 +57,12 @@ public class AuthenticationService {
                 user.getFullName(),
                 EmailTemplateName.ACTIVATE_ACCOUNT,
                 activationUrl,
-                newToken.toString(),
+                newToken,
                 "Account activation"
         );
     }
 
-    private Object generateAndSaveActivationToken(User user) {
+    private String generateAndSaveActivationToken(User user) {
         // generate a token
         String generatedToken = generateActivationCode(6);
         var token = Token.builder()
@@ -71,10 +71,9 @@ public class AuthenticationService {
                 .expiresAt(LocalDateTime.now().plusMinutes(15))
                 .user(user)
                 .build();
-
         tokenRepository.save(token);
 
-        return token;
+        return generatedToken;
     }
 
     private String generateActivationCode(int length) {

@@ -1,13 +1,15 @@
 package com.iamsajan.book.email;
 
+import lombok.Getter;
+
+@Getter
 public enum EmailTemplateName {
-    ACTIVATE_ACCOUNT("activation_account");
 
-    private final String templateName;
+    ACTIVATE_ACCOUNT("activate_account");
 
-    EmailTemplateName(String templateName) {
-        this.templateName = templateName;
+    private final String name;
+
+    EmailTemplateName(String name) {
+        this.name = name;
     }
-
 }
-
