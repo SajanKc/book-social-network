@@ -4,8 +4,12 @@ import com.iamsajan.book.User.Token;
 import com.iamsajan.book.User.TokenRepository;
 import com.iamsajan.book.User.User;
 import com.iamsajan.book.User.UserRepository;
+import com.iamsajan.book.email.EmailService;
+import com.iamsajan.book.email.EmailTemplateName;
 import com.iamsajan.book.role.RoleRepository;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +25,12 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
+    private final EmailService emailService;
 
-    public void register(RegistrationRequest request) {
+    @Value("${application.mailing.frontend.activation-url}")
+    private String activationUrl;
+
+    public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
                 // todo: handle exception
                 .orElseThrow(() -> new IllegalStateException("Role USER was not found"));
@@ -41,10 +49,17 @@ public class AuthenticationService {
         sendValidationEmail(user);
     }
 
-    private void sendValidationEmail(User user) {
+    private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user);
         // send email
-
+        emailService.sendEmail(
+                user.getEmail(),
+                user.getFullName(),
+                EmailTemplateName.ACTIVATE_ACCOUNT,
+                activationUrl,
+                newToken.toString(),
+                "Account activation"
+        );
     }
 
     private Object generateAndSaveActivationToken(User user) {
