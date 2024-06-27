@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-@EnableJpaAuditing
+@EnableJpaAuditing(auditorAwareRef = "applicationAuditAware") // Enable JPA Auditing for tracking created and last modified date
 @EnableAsync
 public class BookNetworkApiApplication {
 
