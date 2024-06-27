@@ -1,5 +1,8 @@
 package com.iamsajan.book.auth;
 
+import com.iamsajan.book.auth.dto.AuthenticateRequest;
+import com.iamsajan.book.auth.dto.AuthenticateResponse;
+import com.iamsajan.book.auth.dto.RegistrationRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
@@ -21,6 +24,13 @@ public class AuthenticationController {
     public ResponseEntity<?> register(@RequestBody @Valid RegistrationRequest request) throws MessagingException {
         authenticationService.register(request);
         return ResponseEntity.accepted().build();
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticateResponse> authenticate(
+            @RequestBody @Valid AuthenticateRequest authenticateRequest) {
+
+        return ResponseEntity.ok(authenticationService.authenticate(authenticateRequest));
     }
 
 }

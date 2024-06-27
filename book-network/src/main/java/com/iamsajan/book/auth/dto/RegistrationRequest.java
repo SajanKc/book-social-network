@@ -1,4 +1,4 @@
-package com.iamsajan.book.auth;
+package com.iamsajan.book.auth.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
