@@ -1,6 +1,7 @@
 package com.iamsajan.book.book;
 
 import com.iamsajan.book.book.dto.BookResponse;
+import com.iamsajan.book.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,6 +32,18 @@ public class BookMapper {
                 .owner(book.getOwner().getFullName())
                 // @TODO: Implement later
 //                .cover()
+                .build();
+    }
+
+    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory bookTransactionHistory) {
+        return BorrowedBookResponse.builder()
+                .id(bookTransactionHistory.getBook().getId())
+                .title(bookTransactionHistory.getBook().getTitle())
+                .authorName(bookTransactionHistory.getBook().getAuthorName())
+                .isbn(bookTransactionHistory.getBook().getIsbn())
+                .rate(bookTransactionHistory.getBook().getRate())
+                .returned(bookTransactionHistory.isReturned())
+                .returnApproved(bookTransactionHistory.isReturnedApproved())
                 .build();
     }
 }
