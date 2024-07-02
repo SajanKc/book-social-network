@@ -1,6 +1,7 @@
 package com.iamsajan.book.book;
 
 import com.iamsajan.book.book.dto.BookResponse;
+import com.iamsajan.book.common.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +28,14 @@ public class BookController {
     @GetMapping("{book-id}")
     public ResponseEntity<BookResponse> findBookById(@PathVariable("book-id") Integer bookId) {
         return ResponseEntity.ok(bookService.findBookById(bookId));
+    }
+
+    @GetMapping
+    public ResponseEntity<PageResponse<BookResponse>> findAllBooks(
+            @RequestParam(name = "page", defaultValue = "0", required = false) Integer page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) Integer size,
+            Authentication connectedUser
+    ) {
+        return ResponseEntity.ok(bookService.findAllBooks(page, size, connectedUser));
     }
 }
