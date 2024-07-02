@@ -1,6 +1,7 @@
 package com.iamsajan.book.book;
 
 import com.iamsajan.book.book.dto.BookResponse;
+import com.iamsajan.book.book.file.FileUtils;
 import com.iamsajan.book.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,7 @@ public class BookMapper {
                 .rate(book.getRate())
                 .shareable(book.isShareable())
                 .owner(book.getOwner().getFullName())
-                // @TODO: Implement later
-//                .cover()
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 
