@@ -2,6 +2,7 @@ package com.iamsajan.book.book;
 
 import com.iamsajan.book.User.User;
 import com.iamsajan.book.book.dto.BookResponse;
+import com.iamsajan.book.book.exception.OperationNotPermittedException;
 import com.iamsajan.book.common.PageResponse;
 import com.iamsajan.book.history.BookTransactionHistory;
 import com.iamsajan.book.history.BookTransactionHistoryRepository;
@@ -15,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.iamsajan.book.book.BookSpecification.withOwnerId;
 
@@ -112,5 +114,16 @@ public class BookService {
                 allBorrowedBooks.isFirst(),
                 allBorrowedBooks.isLast()
         );
+    }
+
+    public Integer updateShareableStatus(Integer bookId, Authentication connectedUser) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found with the ID: " + bookId));
+        User user = (User) connectedUser.getPrincipal();
+        if (!Objects.equals(book.getOwner().getBooks(), user.getId())) {
+            throw new OperationNotPermittedException("You cannot update books shareable status");
+        }
+        book.setShareable(!book.isShareable());
+        return bookRepository.save(book).getId();
     }
 }
