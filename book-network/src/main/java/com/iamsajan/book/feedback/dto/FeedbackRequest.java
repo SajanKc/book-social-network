@@ -1,4 +1,4 @@
-package com.iamsajan.book.feedback;
+package com.iamsajan.book.feedback.dto;
 
 import jakarta.validation.constraints.*;
 
