@@ -1,4 +1,4 @@
-package com.iamsajan.book.book;
+package com.iamsajan.book.book.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

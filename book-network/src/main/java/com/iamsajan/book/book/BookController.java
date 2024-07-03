@@ -1,6 +1,8 @@
 package com.iamsajan.book.book;
 
+import com.iamsajan.book.book.dto.BookRequest;
 import com.iamsajan.book.book.dto.BookResponse;
+import com.iamsajan.book.book.dto.BorrowedBookResponse;
 import com.iamsajan.book.common.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.iamsajan.book.book;
+package com.iamsajan.book.book.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

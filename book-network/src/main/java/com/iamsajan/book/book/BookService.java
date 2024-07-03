@@ -1,7 +1,9 @@
 package com.iamsajan.book.book;
 
 import com.iamsajan.book.User.User;
+import com.iamsajan.book.book.dto.BookRequest;
 import com.iamsajan.book.book.dto.BookResponse;
+import com.iamsajan.book.book.dto.BorrowedBookResponse;
 import com.iamsajan.book.book.exception.OperationNotPermittedException;
 import com.iamsajan.book.common.PageResponse;
 import com.iamsajan.book.file.FileStorageService;
