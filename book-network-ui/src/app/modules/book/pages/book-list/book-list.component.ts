@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {PageResponseBookResponse} from "../../../../../services/models/page-response-book-response";
-import {BookService} from "../../../../../services/services/book.service";
-import {BookResponse} from "../../../../../services/models/book-response";
+import {PageResponseBookResponse} from "../../../../services/models/page-response-book-response";
+import {BookService} from "../../../../services/services/book.service";
+import {BookResponse} from "../../../../services/models/book-response";
 
 @Component({
   selector: 'app-book-list',

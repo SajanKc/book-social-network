@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {BookResponse} from "../../../../../services/models/book-response";
+import {BookResponse} from "../../../../services/models/book-response";
 
 @Component({
   selector: 'app-book-card',
@@ -15,7 +15,7 @@ export class BookCardComponent {
     if (this._book.cover) {
       return 'data:image/jpg;base64,' + this._book.cover
     }
-    return 'https://source.unsplash.com/user/c_v_r/1900x800';
+    return 'https://picsum.photos/1900/800';
   }
 
   get book(): BookResponse {
