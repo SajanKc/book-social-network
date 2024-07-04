@@ -1,11 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MenuComponent} from "./pages/components/menu/menu.component";
+import {MainComponent} from "./pages/main/main.component";
+import {BookListComponent} from "./pages/components/book-list/book-list.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: MenuComponent
+    component: MainComponent,
+    children: [
+      {
+        path: '',
+        component: BookListComponent,
+      }
+    ]
   }
 ];
 
